@@ -1,7 +1,5 @@
 # BlockChain
 
-[![N|Solid](https://cldup.com/dTxpPi9lDf.thumb.png)](https://nodesource.com/products/nsolid)
-
 Work in progress. Attempting to implement Daniel van Flymen's [blockchain algorithm](https://hackernoon.com/learn-blockchains-by-building-one-117428612f46) in NodeJS and Docker.
 
 # Run
