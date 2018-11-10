@@ -1,0 +1,21 @@
+{
+  "name": "mwitu-coin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "RESOLUTION_HASH=0000 HASH_TYPE=SHA256 CRYPTO_SECRET=123 node index.js",
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^23.6.0"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "uuid4": "^1.1.4"
+  }
+}
