@@ -62,10 +62,7 @@ app.get('/mine', (req, res) => {
   // we run the proof of work algorithm to get the next proof..
   const lastBlock = blockChain.lastBlock();
   const lastProof = lastBlock.proof;
-  console.log(`${nodeIdentifier} started POW`);
   const proof = blockChain.proofOfWork(lastProof);
-  console.log(`${nodeIdentifier} completed POW`);
-
   // Recieve a reward for finding the proof
   // denote sender as "0" to signify that this node has mined a new coin.
   blockChain.newTransaction(0, nodeIdentifier, 1);

@@ -23,9 +23,7 @@ class BlockChain {
 
   hash(block) {
     const blockString = JSON.stringify(block);
-    const hash = crypto.createHash(process.env.HASH_TYPE).update(`${lastProof}${proof}`).digest('hex');
-    // const hash = crypto.createHmac(process.env.HASH_TYPE, process.env.CRYPTO_SECRET)
-    //   .update(blockString).digest('hex');
+    const hash = crypto.createHash(process.env.HASH_TYPE).update(blockString).digest('hex');
     return hash;
   }
 /**
@@ -105,11 +103,13 @@ class BlockChain {
   }
 
   validProof(lastProof, proof) {
+    const resHash = process.env.RESOLUTION_HASH;
     const guessHash =  crypto.createHash(process.env.HASH_TYPE).update(`${lastProof}${proof}`).digest('hex');
     // const guessHash = crypto.createHmac(process.env.HASH_TYPE, process.env.CRYPTO_SECRET)
     //   .update(`${lastProof}${proof}`)
     //   .digest('hex');
-    return guessHash.substr(0, 5) === process.env.RESOLUTION_HASH;
+    console.log(guessHash.substr(0, 5));
+    return guessHash.substr(0, resHash.length) === resHash;
   }
 
   /**
