@@ -1,10 +1,10 @@
 #!/bin/sh
-
+#REQUIRES PYTHON 2.6+
 # instance names of our cluster
 INSTANCES=("mwitu0"
-# "mwitu1"
-# "mwitu2"
-# "mwitu3"
+"mwitu1"
+"mwitu2"
+"mwitu3"
 )
 URLS=()
 data=""
@@ -12,12 +12,13 @@ data=""
 port=4040
 for instance in "${INSTANCES[@]}"
 do
-  # # stop instance if it exists
-  # docker stop ${instance}
-  # # remove instance if it exists
-  # docker rm ${instance}
-  # # create instance
-  # docker run -d -p "${port}":4040 --name "${instance}" -t mwitu_image bash
+  # stop instance if it exists
+  docker stop ${instance}
+  # remove instance if it exists
+  docker rm ${instance}
+  # create instance
+  docker run -d -p "${port}":4040 --name "${instance}" -t mwitu_image bash
+  sleep 3
   host="$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' ${instance})"
   URLS+=("localhost:${port}")
   data+="\"${host}:4040\"",
@@ -26,12 +27,15 @@ do
 done
 
 # replace trailing comma with ]
-data="${data/%,/}"
+data=["${data/%,/}"]
 for baseUrl in "${URLS[@]}"
 do
   echo ${baseUrl}/nodes/register
-  json=\{"node":[$data]\}
+  json={\"nodes\":${data}}
+  # test=$(echo ${json}| python -m json.tool)
+  echo $json
   # make all nodes know about each other
   # endpoint="http://${baseUrl}"
-  curl -H \'Content-Type: application/json\' POST --data $json http://"${baseUrl}"/nodes/register
+  echo "=========================================>"
+  curl -X POST -H "Content-Type:application/json"  --globoff -d "${json}"  http://"${baseUrl}"/nodes/register 
 done
