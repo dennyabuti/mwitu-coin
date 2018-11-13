@@ -11,4 +11,4 @@ COPY ./entrypoint.sh /
 EXPOSE 4040
 WORKDIR /app
 # ENTRYPOINT ["/entrypoint.sh"]
-ENTRYPOINT yarn start
+ENTRYPOINT yarn install && yarn start
