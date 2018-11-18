@@ -2,6 +2,9 @@
   "name": "mwitu-coin",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": ">=8"
+  },
   "main": "index.js",
   "scripts": {
     "start": "RESOLUTION_HASH=0000 HASH_TYPE=SHA256 CRYPTO_SECRET=123 node index.js",
